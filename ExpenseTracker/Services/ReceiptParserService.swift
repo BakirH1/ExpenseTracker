@@ -120,7 +120,7 @@ enum ReceiptParserService {
         let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
         try handler.perform([request]) // synchronous; results populated on return
 
-        let observations = (request.results as? [VNRecognizedTextObservation]) ?? []
+        let observations = request.results ?? []
         return observations.compactMap { observation in
             guard let candidate = observation.topCandidates(1).first else { return nil }
             return RecognizedLine(
